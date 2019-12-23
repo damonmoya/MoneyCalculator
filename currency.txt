@@ -1,0 +1,3 @@
+﻿Euro,€,EUR
+Libra,£,GBP
+Dolar,$,USD

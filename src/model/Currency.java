@@ -1,32 +1,25 @@
-package moneycalculator.model;
+package model;
 
 public class Currency {
     private final String code;
     private final String name;
     private final String symbol;
 
-    public Currency(String code, String name, String symbol) {
+    public Currency(String name, String symbol,String code) {
         this.code = code;
         this.name = name;
         this.symbol = symbol;
     }
 
-    public String getCode() {
+    public String code() {
         return code;
     }
 
-    public String getName() {
+    public String name(){
         return name;
     }
 
-    public String getSymbol() {
+    public String symbol() {
         return symbol;
     }
-
-    @Override
-    public String toString() {
-        return code;
-    }
-    
-    
 }
