@@ -1,6 +1,6 @@
 package moneycalculator.model;
 
-public class Money {
+public class Money {    
     private final double amount;
     private final Currency currency;
 
@@ -16,6 +16,7 @@ public class Money {
     public Currency getCurrency() {
         return currency;
     }
+    
     
     
 }

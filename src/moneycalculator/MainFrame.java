@@ -19,15 +19,15 @@ import moneycalculator.ui.swing.SwingMoneyDisplay;
 
 public class MainFrame extends JFrame{
 
-    private final Map<String,Command> commands = new HashMap<>();
+    private final Currency[] currencies;
+    private final Map<String, Command> commands = new HashMap<>();
     private MoneyDialog moneyDialog;
     private MoneyDisplay moneyDisplay;
-    private final Currency[] currencies;
 
     public MainFrame(Currency[] currencies) {
         this.currencies = currencies;
         this.setTitle("Money Calculator");
-        this.setSize(400, 400);
+        this.setSize(400,400);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.add(moneyDialog(), BorderLayout.NORTH);
@@ -35,6 +35,8 @@ public class MainFrame extends JFrame{
         this.add(toolbar(), BorderLayout.SOUTH);
         this.setVisible(true);
     }
+    
+    
 
     public void add(Command command){
         commands.put(command.name(), command);
@@ -47,7 +49,6 @@ public class MainFrame extends JFrame{
     public MoneyDisplay getMoneyDisplay() {
         return moneyDisplay;
     }
-    
     
     private Component moneyDialog() {
         SwingMoneyDialog dialog = new SwingMoneyDialog(currencies);
@@ -62,7 +63,7 @@ public class MainFrame extends JFrame{
     }
 
     private Component toolbar() {
-        JPanel panel = new JPanel();
+        final JPanel panel = new JPanel();
         panel.add(calculateButton());
         return panel;
     }
@@ -74,12 +75,14 @@ public class MainFrame extends JFrame{
     }
 
     private ActionListener calculate() {
-        return new ActionListener(){
+        return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 commands.get("calculate").execute();
-            }  
+            }
         };
     }
-   
+    
+    
+    
 }

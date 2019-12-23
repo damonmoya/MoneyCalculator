@@ -12,7 +12,7 @@ import moneycalculator.persistence.CurrencyListLoader;
 public class FileCurrencyListLoader implements CurrencyListLoader{
 
     private final String filename;
-    
+
     public FileCurrencyListLoader(String filename) {
         this.filename = filename;
     }
@@ -20,11 +20,11 @@ public class FileCurrencyListLoader implements CurrencyListLoader{
     @Override
     public Currency[] currencies() {
         List<Currency> list = new ArrayList<>();
-        try{
+        try {
             BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
-            while (true){
+            while(true){
                 String line = reader.readLine();
-                if (line == null) break;
+                if(line == null) break;
                 list.add(currencyOf(line));
             }
         } catch (IOException ex) {
@@ -34,7 +34,7 @@ public class FileCurrencyListLoader implements CurrencyListLoader{
 
     private Currency currencyOf(String line) {
         String[] split = line.split(",");
-        return new Currency(split[0],split[1],split[2]);
+        return new Currency(split[0], split[1], split[2]);
     }
-    
+
 }
