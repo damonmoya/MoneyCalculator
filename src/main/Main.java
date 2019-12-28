@@ -16,6 +16,9 @@ public class Main extends JFrame {
     private static CurrencySet currencySet;
 
     public static void main(String[] args) throws IOException {
+        try { 
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"); 
+        } catch(Exception ignored){}
         new Main().setVisible(true);
     }
 
@@ -32,9 +35,12 @@ public class Main extends JFrame {
     private void deployUI() {
         this.setTitle("Money Calculator");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setMinimumSize(new Dimension(800,200));
+        this.setMinimumSize(new Dimension(500,150));
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.getContentPane().add(applicationPanel());
+        this.getContentPane().add(applicationPanel(),BorderLayout.NORTH);
+        this.getContentPane().add(applicationPanel2(),BorderLayout.CENTER);
+        this.getContentPane().add(applicationPanel3(),BorderLayout.SOUTH);
     }
 
     private JPanel applicationPanel() {
@@ -45,7 +51,17 @@ public class Main extends JFrame {
         panel.add(originalMoneyTextField());
         panel.add(exchangeToLabel());
         panel.add(exchangeToCombo());
+        return panel;
+    }
+    
+    private JPanel applicationPanel2() {
+        JPanel panel = new JPanel();
         panel.add(exchangeButton());
+        return panel;
+    }
+    
+    private JPanel applicationPanel3() {
+        JPanel panel = new JPanel();
         panel.add(resultLabel());
         panel.add(resultTextField());
         return panel;
@@ -53,19 +69,23 @@ public class Main extends JFrame {
 
     private JButton exchangeButton() {
         JButton button = new JButton("Calculate");
+        button.setPreferredSize(new Dimension(80,40));
         button.addActionListener(e -> commands.get("Calculate").execute());
         return button;
     }
 
     private JTextField resultTextField() {
         JTextField text = new JTextField();
+        text.setLayout(new FlowLayout(FlowLayout.LEFT));
         text.setPreferredSize(new Dimension(160,24));
+        text.setEditable(false);
         components.put("ResultTextField",text);
         return text;
     }
 
     private JLabel resultLabel() {
-        JLabel label = new JLabel("Result: ");
+        JLabel label = new JLabel("Exchange: ");
+        label.setLayout(new FlowLayout(FlowLayout.CENTER));
         return label;
     }
 
@@ -89,12 +109,12 @@ public class Main extends JFrame {
     }
 
     private JLabel originalMoneyLabel() {
-        JLabel label = new JLabel("Money: ");
+        JLabel label = new JLabel("Amount: ");
         return label;
     }
 
     private JLabel exchangeToLabel() {
-        JLabel label = new JLabel("Exchange to: ");
+        JLabel label = new JLabel("To: ");
         return label;
     }
 
@@ -117,7 +137,7 @@ public class Main extends JFrame {
     }
 
     private JLabel originalLabel() {
-        JLabel label = new JLabel("Original: ");
+        JLabel label = new JLabel("From: ");
         return label;
     }
 
